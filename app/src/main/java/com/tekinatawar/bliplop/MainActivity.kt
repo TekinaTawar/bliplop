@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import com.tekinatawar.bliplop.ui.theme.BlipLopTheme
 
 class MainActivity : ComponentActivity() {
+    //Todo: Get permission to record audio.
     private val viewModel: BlipLopViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
 
