@@ -8,12 +8,12 @@ class BlipLopModel {
 
     // let's assume that that the whole business logic of our bliplop app is to set isPlaying value rightly and logging it.
     fun play() {
+        Log.d(TAG, "playing., is Playing was: ${isPlaying}")
         isPlaying = true;
-        Log.d(TAG, "playing...")
     }
 
     fun stop() {
         isPlaying = false;
-        Log.d(TAG, "stopped.")
+        Log.d(TAG, "stopped. is playing was: ${isPlaying}")
     }
 }

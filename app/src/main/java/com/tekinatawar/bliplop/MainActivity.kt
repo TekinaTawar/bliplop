@@ -12,14 +12,15 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.tekinatawar.bliplop.ui.theme.BlipLopTheme
 
 class MainActivity : ComponentActivity() {
+    private val viewModel: BlipLopViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
-        val viewModel = BlipLopViewModel()
+
 
         super.onCreate(savedInstanceState)
         setContent {
@@ -47,9 +48,9 @@ fun BlipLopApp(
         verticalArrangement = Arrangement.Center
     ) {
         // what is need of modifer in this button??
+        val playButtonLabel = viewModel.playBackButtonLabel.observeAsState()
         Button(modifier = modifier, onClick = { viewModel.playBackClicked() }) {
-            Text("Start Playback")
+            Text(playButtonLabel.value!!)
         }
     }
-
 }
