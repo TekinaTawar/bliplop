@@ -12,8 +12,14 @@ namespace bliplop {
 
         bool isPlaying() const;
 
+        // gain factor
+        // low pass filter
+        // high pass filter
+
     private:
         bool _isPlaying = false;
+        int source;
+        int sink;
     };
 
 }
