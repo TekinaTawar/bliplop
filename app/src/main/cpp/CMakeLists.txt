@@ -7,7 +7,7 @@ add_library(
         SHARED
 
         # Provides a relative path to your source file(s).
-        include/OboeSinePlayer.h
+        include/archive/OboeSinePlayer.h
         DuplexEngine.cpp
         BlipLop.cpp
         CJavaBridge.cpp)

@@ -1,7 +1,8 @@
 #include "BlipLop.h"
 #include "Log.h"
-#include "OboeSinePlayer.h"
+#include "archive/OboeSinePlayer.h"
 #include "DuplexEngine.h"
+//#include "FunctionList.h"
 
 namespace bliplop {
     static DuplexEngine *enginePtr = nullptr;
@@ -10,7 +11,7 @@ namespace bliplop {
         LOGD("BlipLop::play() called");
         _isPlaying = true;
         enginePtr = new DuplexEngine();
-
+        setGain();
     }
 
     void BlipLop::stop() {
@@ -25,6 +26,27 @@ namespace bliplop {
         LOGD("BlipLop::isPlaying() called");
         return _isPlaying;
     }
+
+    template<typename Iter>
+    void Gain(Iter begin, Iter end) {
+        const float gain = 10.0f;
+        for (auto it = begin; it != end; ++it) {
+            *it *= gain;
+        }
+    }
+
+//    std::function<void(iter_type, iter_type)> gainFunc = &Gain<iter_type>;
+
+    void BlipLop::setGain() {
+        LOGD("BlipLop::setGain() called");
+        if (!enginePtr) return;
+        std::visit([](auto &&stack) {
+            using iter_type = decltype(stack.getType());
+            std::function<void(iter_type, iter_type)> f = &Gain<iter_type>;
+            stack.addEffect(f);
+        }, enginePtr->functionList);
+    }
+
 
     //Todo: setSource
     //Todo: setSink

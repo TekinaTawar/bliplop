@@ -13,6 +13,7 @@ namespace bliplop {
         bool isPlaying() const;
 
         // gain factor
+        void setGain();
         // low pass filter
         // high pass filter
 

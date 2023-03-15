@@ -11,14 +11,13 @@ class DuplexEngine {
 public:
     DuplexEngine();
 
-    void beginStreams();
-
     virtual ~DuplexEngine() = default;
+
+    void beginStreams();
 
     oboe::Result startStreams();
 
     oboe::Result stopStreams();
-
 
     std::variant<FunctionList<int16_t *>, FunctionList<float *>> functionList{
             std::in_place_type<FunctionList<int16_t *>>};
@@ -27,14 +26,14 @@ private:
 
     void openInStream();
 
-    void openOutStream();
-
-    static oboe::AudioStreamBuilder defaultBuilder();
-
     template<class numeric>
     void createCallback();
+
+    void openOutStream();
 
     oboe::ManagedStream inStream;
     std::unique_ptr<oboe::AudioStreamCallback> mCallback;
     oboe::ManagedStream outStream;
+
+    static oboe::AudioStreamBuilder defaultBuilder();
 };
